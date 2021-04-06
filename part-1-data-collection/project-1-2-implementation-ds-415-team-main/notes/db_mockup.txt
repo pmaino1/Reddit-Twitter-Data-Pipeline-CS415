@@ -1,0 +1,781 @@
+NOTES
+--------------------
+Apparently Mongo 3.0 is outdated, need 4.0 for zstd compression (newtork).
+Able to use zlib or Snappy compression (zlib is more intensive)
+We are on 3.6.8
+
+Twitter (SAMPLED)
+--------------------
+This collection has all tweets from the sample stream with no filtering whatsoever. Contains a data field with the tweet. Meta data will be added in a different collection after analysis has been conducted.
+
+Twitter (Filtered)
+--------------------
+This collection contains tweets from the sample stream with filtering for the list of keywords that we wish to search for. Meta data will be added in a different collection after analysis has been conducted.
+
+Reddit (Posts)
+--------------------
+Reddit posts will be added from various subreddits and, importantly, their titles and text(if available) will be stored. Meta data will be added in a different collection after analysis has been conducted.
+
+Reddit (Comments)
+--------------------
+Reddit comments will be added from various subreddits their text and corresponding post will be stored. Meta data will be added in a different collection after analysis has been conducted.
+
+
+
+For compression
+-------
+> db.createCollection('comp', {storageEngine: {wiredTiger: {configString: 'block_compressor=zlib'}}})
+
+
+
+COMPRESSED collection
+{
+        "ns" : "cs415.comp",
+        "size" : 410130,
+        "count" : 6510,
+        "avgObjSize" : 63,
+        "storageSize" : 106496,
+        "capped" : false,
+        "wiredTiger" : {
+                "metadata" : {
+                        "formatVersion" : 1
+                },
+                "creationString" : "access_pattern_hint=none,allocation_size=4KB,app_metadata=(formatVersion=1),assert=(commit_timestamp=none,read_timestamp=none),block_allocation=best,block_compressor=zlib,cache_resident=false,checksum=on,colgroups=,collator=,columns=,dictionary=0,encryption=(keyid=,name=),exclusive=false,extractor=,format=btree,huffman_key=,huffman_value=,ignore_in_memory_cache_size=false,immutable=false,internal_item_max=0,internal_key_max=0,internal_key_truncate=true,internal_page_max=4KB,key_format=q,key_gap=10,leaf_item_max=0,leaf_key_max=0,leaf_page_max=32KB,leaf_value_max=64MB,log=(enabled=true),lsm=(auto_throttle=true,bloom=true,bloom_bit_count=16,bloom_config=,bloom_hash_count=8,bloom_oldest=false,chunk_count_limit=0,chunk_max=5GB,chunk_size=10MB,merge_custom=(prefix=,start_generation=0,suffix=),merge_max=15,merge_min=0),memory_page_max=10m,os_cache_dirty_max=0,os_cache_max=0,prefix_compression=false,prefix_compression_min=4,source=,split_deepen_min_child=0,split_deepen_per_child=0,split_pct=90,type=file,value_format=u",
+                "type" : "file",
+                "uri" : "statistics:table:collection-19-3820486403940576980",
+                "LSM" : {
+                        "bloom filter false positives" : 0,
+                        "bloom filter hits" : 0,
+                        "bloom filter misses" : 0,
+                        "bloom filter pages evicted from cache" : 0,
+                        "bloom filter pages read into cache" : 0,
+                        "bloom filters in the LSM tree" : 0,
+                        "chunks in the LSM tree" : 0,
+                        "highest merge generation in the LSM tree" : 0,
+                        "queries that could have benefited from a Bloom filter that did not exist" : 0,
+                        "sleep for LSM checkpoint throttle" : 0,
+                        "sleep for LSM merge throttle" : 0,
+                        "total size of bloom filters" : 0
+                },
+                "block-manager" : {
+                        "allocations requiring file extension" : 8,
+                        "blocks allocated" : 12,
+                        "blocks freed" : 2,
+                        "checkpoint size" : 45056,
+                        "file allocation unit size" : 4096,
+                        "file bytes available for reuse" : 45056,
+                        "file magic number" : 120897,
+                        "file major version number" : 1,
+                        "file size in bytes" : 106496,
+                        "minor version number" : 0
+                },
+                "btree" : {
+                        "btree checkpoint generation" : 87041,
+                        "column-store fixed-size leaf pages" : 0,
+                        "column-store internal pages" : 0,
+                        "column-store variable-size RLE encoded values" : 0,
+                        "column-store variable-size deleted values" : 0,
+                        "column-store variable-size leaf pages" : 0,
+                        "fixed-record size" : 0,
+                        "maximum internal page key size" : 368,
+                        "maximum internal page size" : 4096,
+                        "maximum leaf page key size" : 2867,
+                        "maximum leaf page size" : 32768,
+                        "maximum leaf page value size" : 67108864,
+                        "maximum tree depth" : 3,
+                        "number of key/value pairs" : 0,
+                        "overflow pages" : 0,
+                        "pages rewritten by compaction" : 0,
+                        "row-store internal pages" : 0,
+                        "row-store leaf pages" : 0
+                },
+                "cache" : {
+                        "bytes currently in the cache" : 876810,
+                        "bytes read into cache" : 0,
+                        "bytes written from cache" : 910264,
+                        "checkpoint blocked page eviction" : 0,
+                        "data source pages selected for eviction unable to be evicted" : 0,
+                        "eviction walk passes of a file" : 0,
+                        "eviction walk target pages histogram - 0-9" : 0,
+                        "eviction walk target pages histogram - 10-31" : 0,
+                        "eviction walk target pages histogram - 128 and higher" : 0,
+                        "eviction walk target pages histogram - 32-63" : 0,
+                        "eviction walk target pages histogram - 64-128" : 0,
+                        "eviction walks abandoned" : 0,
+                        "eviction walks gave up because they restarted their walk twice" : 0,
+                        "eviction walks gave up because they saw too many pages and found no candidates" : 0,
+                        "eviction walks gave up because they saw too many pages and found too few candidates" : 0,
+                        "eviction walks reached end of tree" : 0,
+                        "eviction walks started from root of tree" : 0,
+                        "eviction walks started from saved location in tree" : 0,
+                        "hazard pointer blocked page eviction" : 0,
+                        "in-memory page passed criteria to be split" : 0,
+                        "in-memory page splits" : 0,
+                        "internal pages evicted" : 0,
+                        "internal pages split during eviction" : 0,
+                        "leaf pages split during eviction" : 0,
+                        "modified pages evicted" : 0,
+                        "overflow pages read into cache" : 0,
+                        "page split during eviction deepened the tree" : 0,
+                        "page written requiring lookaside records" : 0,
+                        "pages read into cache" : 0,
+                        "pages read into cache after truncate" : 1,
+                        "pages read into cache after truncate in prepare state" : 0,
+                        "pages read into cache requiring lookaside entries" : 0,
+                        "pages requested from the cache" : 6510,
+                        "pages seen by eviction walk" : 0,
+                        "pages written from cache" : 7,
+                        "pages written requiring in-memory restoration" : 0,
+                        "tracked dirty bytes in the cache" : 0,
+                        "unmodified pages evicted" : 0
+                },
+                "cache_walk" : {
+                        "Average difference between current eviction generation when the page was last considered" : 0,
+                        "Average on-disk page image size seen" : 0,
+                        "Average time in cache for pages that have been visited by the eviction server" : 0,
+                        "Average time in cache for pages that have not been visited by the eviction server" : 0,
+                        "Clean pages currently in cache" : 0,
+                        "Current eviction generation" : 0,
+                        "Dirty pages currently in cache" : 0,
+                        "Entries in the root page" : 0,
+                        "Internal pages currently in cache" : 0,
+                        "Leaf pages currently in cache" : 0,
+                        "Maximum difference between current eviction generation when the page was last considered" : 0,
+                        "Maximum page size seen" : 0,
+                        "Minimum on-disk page image size seen" : 0,
+                        "Number of pages never visited by eviction server" : 0,
+                        "On-disk page image sizes smaller than a single allocation unit" : 0,
+                        "Pages created in memory and never written" : 0,
+                        "Pages currently queued for eviction" : 0,
+                        "Pages that could not be queued for eviction" : 0,
+                        "Refs skipped during cache traversal" : 0,
+                        "Size of the root page" : 0,
+                        "Total number of pages currently in cache" : 0
+                },
+                "compression" : {
+                        "compressed pages read" : 0,
+                        "compressed pages written" : 0,
+                        "page written failed to compress" : 0,
+                        "page written was too small to compress" : 3,
+                        "raw compression call failed, additional data available" : 1,
+                        "raw compression call failed, no additional data available" : 0,
+                        "raw compression call succeeded" : 5
+                },
+                "cursor" : {
+                        "bulk-loaded cursor-insert calls" : 0,
+                        "create calls" : 2,
+                        "cursor-insert key and value bytes inserted" : 423087,
+                        "cursor-remove key bytes removed" : 0,
+                        "cursor-update value bytes updated" : 0,
+                        "cursors cached on close" : 0,
+                        "cursors reused from cache" : 0,
+                        "insert calls" : 6510,
+                        "modify calls" : 0,
+                        "next calls" : 1,
+                        "prev calls" : 1,
+                        "remove calls" : 0,
+                        "reserve calls" : 0,
+                        "reset calls" : 6512,
+                        "restarted searches" : 0,
+                        "search calls" : 0,
+                        "search near calls" : 0,
+                        "truncate calls" : 0,
+                        "update calls" : 0
+                },
+                "reconciliation" : {
+                        "dictionary matches" : 0,
+                        "fast-path pages deleted" : 0,
+                        "internal page key bytes discarded using suffix compression" : 0,
+                        "internal page multi-block writes" : 0,
+                        "internal-page overflow keys" : 0,
+                        "leaf page key bytes discarded using prefix compression" : 0,
+                        "leaf page multi-block writes" : 1,
+                        "leaf-page overflow keys" : 0,
+                        "maximum blocks required for a page" : 1,
+                        "overflow values written" : 0,
+                        "page checksum matches" : 0,
+                        "page reconciliation calls" : 6,
+                        "page reconciliation calls for eviction" : 0,
+                        "pages deleted" : 0
+                },
+                "session" : {
+                        "cached cursor count" : 0,
+                        "object compaction" : 0,
+                        "open cursor count" : 2
+                },
+                "transaction" : {
+                        "update conflicts" : 0
+                }
+        },
+        "nindexes" : 1,
+        "totalIndexSize" : 102400,
+        "indexSizes" : {
+                "_id_" : 102400
+        },
+        "ok" : 1
+}
+
+
+NOT COMPRESSED
+{
+        "ns" : "cs415.no_comp",
+        "size" : 410130,
+        "count" : 6510,
+        "avgObjSize" : 63,
+        "storageSize" : 159744,
+        "capped" : false,
+        "wiredTiger" : {
+                "metadata" : {
+                        "formatVersion" : 1
+                },
+                "creationString" : "access_pattern_hint=none,allocation_size=4KB,app_metadata=(formatVersion=1),assert=(commit_timestamp=none,read_timestamp=none),block_allocation=best,block_compressor=snappy,cache_resident=false,checksum=on,colgroups=,collator=,columns=,dictionary=0,encryption=(keyid=,name=),exclusive=false,extractor=,format=btree,huffman_key=,huffman_value=,ignore_in_memory_cache_size=false,immutable=false,internal_item_max=0,internal_key_max=0,internal_key_truncate=true,internal_page_max=4KB,key_format=q,key_gap=10,leaf_item_max=0,leaf_key_max=0,leaf_page_max=32KB,leaf_value_max=64MB,log=(enabled=true),lsm=(auto_throttle=true,bloom=true,bloom_bit_count=16,bloom_config=,bloom_hash_count=8,bloom_oldest=false,chunk_count_limit=0,chunk_max=5GB,chunk_size=10MB,merge_custom=(prefix=,start_generation=0,suffix=),merge_max=15,merge_min=0),memory_page_max=10m,os_cache_dirty_max=0,os_cache_max=0,prefix_compression=false,prefix_compression_min=4,source=,split_deepen_min_child=0,split_deepen_per_child=0,split_pct=90,type=file,value_format=u",
+                "type" : "file",
+                "uri" : "statistics:table:collection-17-3820486403940576980",
+                "LSM" : {
+                        "bloom filter false positives" : 0,
+                        "bloom filter hits" : 0,
+                        "bloom filter misses" : 0,
+                        "bloom filter pages evicted from cache" : 0,
+                        "bloom filter pages read into cache" : 0,
+                        "bloom filters in the LSM tree" : 0,
+                        "chunks in the LSM tree" : 0,
+                        "highest merge generation in the LSM tree" : 0,
+                        "queries that could have benefited from a Bloom filter that did not exist" : 0,
+                        "sleep for LSM checkpoint throttle" : 0,
+                        "sleep for LSM merge throttle" : 0,
+                        "total size of bloom filters" : 0
+                },
+                "block-manager" : {
+                        "allocations requiring file extension" : 26,
+                        "blocks allocated" : 28,
+                        "blocks freed" : 4,
+                        "checkpoint size" : 122880,
+                        "file allocation unit size" : 4096,
+                        "file bytes available for reuse" : 20480,
+                        "file magic number" : 120897,
+                        "file major version number" : 1,
+                        "file size in bytes" : 159744,
+                        "minor version number" : 0
+                },
+                "btree" : {
+                        "btree checkpoint generation" : 87042,
+                        "column-store fixed-size leaf pages" : 0,
+                        "column-store internal pages" : 0,
+                        "column-store variable-size RLE encoded values" : 0,
+                        "column-store variable-size deleted values" : 0,
+                        "column-store variable-size leaf pages" : 0,
+                        "fixed-record size" : 0,
+                        "maximum internal page key size" : 368,
+                        "maximum internal page size" : 4096,
+                        "maximum leaf page key size" : 2867,
+                        "maximum leaf page size" : 32768,
+                        "maximum leaf page value size" : 67108864,
+                        "maximum tree depth" : 3,
+                        "number of key/value pairs" : 0,
+                        "overflow pages" : 0,
+                        "pages rewritten by compaction" : 0,
+                        "row-store internal pages" : 0,
+                        "row-store leaf pages" : 0
+                },
+                "cache" : {
+                        "bytes currently in the cache" : 877242,
+                        "bytes read into cache" : 0,
+                        "bytes written from cache" : 510730,
+                        "checkpoint blocked page eviction" : 0,
+                        "data source pages selected for eviction unable to be evicted" : 0,
+                        "eviction walk passes of a file" : 0,
+                        "eviction walk target pages histogram - 0-9" : 0,
+                        "eviction walk target pages histogram - 10-31" : 0,
+                        "eviction walk target pages histogram - 128 and higher" : 0,
+                        "eviction walk target pages histogram - 32-63" : 0,
+                        "eviction walk target pages histogram - 64-128" : 0,
+                        "eviction walks abandoned" : 0,
+                        "eviction walks gave up because they restarted their walk twice" : 0,
+                        "eviction walks gave up because they saw too many pages and found no candidates" : 0,
+                        "eviction walks gave up because they saw too many pages and found too few candidates" : 0,
+                        "eviction walks reached end of tree" : 0,
+                        "eviction walks started from root of tree" : 0,
+                        "eviction walks started from saved location in tree" : 0,
+                        "hazard pointer blocked page eviction" : 0,
+                        "in-memory page passed criteria to be split" : 0,
+                        "in-memory page splits" : 0,
+                        "internal pages evicted" : 0,
+                        "internal pages split during eviction" : 0,
+                        "leaf pages split during eviction" : 0,
+                        "modified pages evicted" : 0,
+                        "overflow pages read into cache" : 0,
+                        "page split during eviction deepened the tree" : 0,
+                        "page written requiring lookaside records" : 0,
+                        "pages read into cache" : 0,
+                        "pages read into cache after truncate" : 1,
+                        "pages read into cache after truncate in prepare state" : 0,
+                        "pages read into cache requiring lookaside entries" : 0,
+                        "pages requested from the cache" : 6510,
+                        "pages seen by eviction walk" : 0,
+                        "pages written from cache" : 23,
+                        "pages written requiring in-memory restoration" : 0,
+                        "tracked dirty bytes in the cache" : 0,
+                        "unmodified pages evicted" : 0
+                },
+                "cache_walk" : {
+                        "Average difference between current eviction generation when the page was last considered" : 0,
+                        "Average on-disk page image size seen" : 0,
+                        "Average time in cache for pages that have been visited by the eviction server" : 0,
+                        "Average time in cache for pages that have not been visited by the eviction server" : 0,
+                        "Clean pages currently in cache" : 0,
+                        "Current eviction generation" : 0,
+                        "Dirty pages currently in cache" : 0,
+                        "Entries in the root page" : 0,
+                        "Internal pages currently in cache" : 0,
+                        "Leaf pages currently in cache" : 0,
+                        "Maximum difference between current eviction generation when the page was last considered" : 0,
+                        "Maximum page size seen" : 0,
+                        "Minimum on-disk page image size seen" : 0,
+                        "Number of pages never visited by eviction server" : 0,
+                        "On-disk page image sizes smaller than a single allocation unit" : 0,
+                        "Pages created in memory and never written" : 0,
+                        "Pages currently queued for eviction" : 0,
+                        "Pages that could not be queued for eviction" : 0,
+                        "Refs skipped during cache traversal" : 0,
+                        "Size of the root page" : 0,
+                        "Total number of pages currently in cache" : 0
+                },
+                "compression" : {
+                        "compressed pages read" : 0,
+                        "compressed pages written" : 20,
+                        "page written failed to compress" : 0,
+                        "page written was too small to compress" : 3,
+                        "raw compression call failed, additional data available" : 0,
+                        "raw compression call failed, no additional data available" : 0,
+                        "raw compression call succeeded" : 0
+                },
+                "cursor" : {
+                        "bulk-loaded cursor-insert calls" : 0,
+                        "create calls" : 2,
+                        "cursor-insert key and value bytes inserted" : 423087,
+                        "cursor-remove key bytes removed" : 0,
+                        "cursor-update value bytes updated" : 0,
+                        "cursors cached on close" : 0,
+                        "cursors reused from cache" : 0,
+                        "insert calls" : 6510,
+                        "modify calls" : 0,
+                        "next calls" : 1,
+                        "prev calls" : 1,
+                        "remove calls" : 0,
+                        "reserve calls" : 0,
+                        "reset calls" : 6512,
+                        "restarted searches" : 0,
+                        "search calls" : 0,
+                        "search near calls" : 0,
+                        "truncate calls" : 0,
+                        "update calls" : 0
+                },
+                "reconciliation" : {
+                        "dictionary matches" : 0,
+                        "fast-path pages deleted" : 0,
+                        "internal page key bytes discarded using suffix compression" : 62,
+                        "internal page multi-block writes" : 0,
+                        "internal-page overflow keys" : 0,
+                        "leaf page key bytes discarded using prefix compression" : 0,
+                        "leaf page multi-block writes" : 3,
+                        "leaf-page overflow keys" : 0,
+                        "maximum blocks required for a page" : 1,
+                        "overflow values written" : 0,
+                        "page checksum matches" : 14,
+                        "page reconciliation calls" : 6,
+                        "page reconciliation calls for eviction" : 0,
+                        "pages deleted" : 0
+                },
+                "session" : {
+                        "cached cursor count" : 0,
+                        "object compaction" : 0,
+                        "open cursor count" : 2
+                },
+                "transaction" : {
+                        "update conflicts" : 0
+                }
+        },
+        "nindexes" : 1,
+        "totalIndexSize" : 102400,
+        "indexSizes" : {
+                "_id_" : 102400
+        },
+        "ok" : 1
+}
+
+AFTER ONE HOUR OF RUNNING COMP
+--------------------------
+{
+        "ns" : "cs415.comp",
+        "size" : 7763427,
+        "count" : 123229,
+        "avgObjSize" : 63,
+        "storageSize" : 954368,
+        "capped" : false,
+        "wiredTiger" : {
+                "metadata" : {
+                        "formatVersion" : 1
+                },
+                "creationString" : "access_pattern_hint=none,allocation_size=4KB,app_metadata=(formatVersion=1),assert=(commit_timestamp=none,read_timestamp=none),block_allocation=best,block_compressor=zlib,cache_resident=false,checksum=on,colgroups=,collator=,columns=,dictionary=0,encryption=(keyid=,name=),exclusive=false,extractor=,format=btree,huffman_key=,huffman_value=,ignore_in_memory_cache_size=false,immutable=false,internal_item_max=0,internal_key_max=0,internal_key_truncate=true,internal_page_max=4KB,key_format=q,key_gap=10,leaf_item_max=0,leaf_key_max=0,leaf_page_max=32KB,leaf_value_max=64MB,log=(enabled=true),lsm=(auto_throttle=true,bloom=true,bloom_bit_count=16,bloom_config=,bloom_hash_count=8,bloom_oldest=false,chunk_count_limit=0,chunk_max=5GB,chunk_size=10MB,merge_custom=(prefix=,start_generation=0,suffix=),merge_max=15,merge_min=0),memory_page_max=10m,os_cache_dirty_max=0,os_cache_max=0,prefix_compression=false,prefix_compression_min=4,source=,split_deepen_min_child=0,split_deepen_per_child=0,split_pct=90,type=file,value_format=u",
+                "type" : "file",
+                "uri" : "statistics:table:collection-23-3820486403940576980",
+                "LSM" : {
+                        "bloom filter false positives" : 0,
+                        "bloom filter hits" : 0,
+                        "bloom filter misses" : 0,
+                        "bloom filter pages evicted from cache" : 0,
+                        "bloom filter pages read into cache" : 0,
+                        "bloom filters in the LSM tree" : 0,
+                        "chunks in the LSM tree" : 0,
+                        "highest merge generation in the LSM tree" : 0,
+                        "queries that could have benefited from a Bloom filter that did not exist" : 0,
+                        "sleep for LSM checkpoint throttle" : 0,
+                        "sleep for LSM merge throttle" : 0,
+                        "total size of bloom filters" : 0
+                },
+                "block-manager" : {
+                        "allocations requiring file extension" : 39,
+                        "blocks allocated" : 208,
+                        "blocks freed" : 45,
+                        "checkpoint size" : 843776,
+                        "file allocation unit size" : 4096,
+                        "file bytes available for reuse" : 94208,
+                        "file magic number" : 120897,
+                        "file major version number" : 1,
+                        "file size in bytes" : 954368,
+                        "minor version number" : 0
+                },
+                "btree" : {
+                        "btree checkpoint generation" : 87105,
+                        "column-store fixed-size leaf pages" : 0,
+                        "column-store internal pages" : 0,
+                        "column-store variable-size RLE encoded values" : 0,
+                        "column-store variable-size deleted values" : 0,
+                        "column-store variable-size leaf pages" : 0,
+                        "fixed-record size" : 0,
+                        "maximum internal page key size" : 368,
+                        "maximum internal page size" : 4096,
+                        "maximum leaf page key size" : 2867,
+                        "maximum leaf page size" : 32768,
+                        "maximum leaf page value size" : 67108864,
+                        "maximum tree depth" : 3,
+                        "number of key/value pairs" : 0,
+                        "overflow pages" : 0,
+                        "pages rewritten by compaction" : 0,
+                        "row-store internal pages" : 0,
+                        "row-store leaf pages" : 0
+                },
+                "cache" : {
+                        "bytes currently in the cache" : 16764748,
+                        "bytes read into cache" : 0,
+                        "bytes written from cache" : 15821335,
+                        "checkpoint blocked page eviction" : 0,
+                        "data source pages selected for eviction unable to be evicted" : 0,
+                        "eviction walk passes of a file" : 0,
+                        "eviction walk target pages histogram - 0-9" : 0,
+                        "eviction walk target pages histogram - 10-31" : 0,
+                        "eviction walk target pages histogram - 128 and higher" : 0,
+                        "eviction walk target pages histogram - 32-63" : 0,
+                        "eviction walk target pages histogram - 64-128" : 0,
+                        "eviction walks abandoned" : 0,
+                        "eviction walks gave up because they restarted their walk twice" : 0,
+                        "eviction walks gave up because they saw too many pages and found no candidates" : 0,
+                        "eviction walks gave up because they saw too many pages and found too few candidates" : 0,
+                        "eviction walks reached end of tree" : 0,
+                        "eviction walks started from root of tree" : 0,
+                        "eviction walks started from saved location in tree" : 0,
+                        "hazard pointer blocked page eviction" : 0,
+                        "in-memory page passed criteria to be split" : 2,
+                        "in-memory page splits" : 1,
+                        "internal pages evicted" : 0,
+                        "internal pages split during eviction" : 0,
+                        "leaf pages split during eviction" : 0,
+                        "modified pages evicted" : 0,
+                        "overflow pages read into cache" : 0,
+                        "page split during eviction deepened the tree" : 0,
+                        "page written requiring lookaside records" : 0,
+                        "pages read into cache" : 0,
+                        "pages read into cache after truncate" : 1,
+                        "pages read into cache after truncate in prepare state" : 0,
+                        "pages read into cache requiring lookaside entries" : 0,
+                        "pages requested from the cache" : 123231,
+                        "pages seen by eviction walk" : 0,
+                        "pages written from cache" : 117,
+                        "pages written requiring in-memory restoration" : 0,
+                        "tracked dirty bytes in the cache" : 0,
+                        "unmodified pages evicted" : 0
+                },
+                "cache_walk" : {
+                        "Average difference between current eviction generation when the page was last considered" : 0,
+                        "Average on-disk page image size seen" : 0,
+                        "Average time in cache for pages that have been visited by the eviction server" : 0,
+                        "Average time in cache for pages that have not been visited by the eviction server" : 0,
+                        "Clean pages currently in cache" : 0,
+                        "Current eviction generation" : 0,
+                        "Dirty pages currently in cache" : 0,
+                        "Entries in the root page" : 0,
+                        "Internal pages currently in cache" : 0,
+                        "Leaf pages currently in cache" : 0,
+                        "Maximum difference between current eviction generation when the page was last considered" : 0,
+                        "Maximum page size seen" : 0,
+                        "Minimum on-disk page image size seen" : 0,
+                        "Number of pages never visited by eviction server" : 0,
+                        "On-disk page image sizes smaller than a single allocation unit" : 0,
+                        "Pages created in memory and never written" : 0,
+                        "Pages currently queued for eviction" : 0,
+                        "Pages that could not be queued for eviction" : 0,
+                        "Refs skipped during cache traversal" : 0,
+                        "Size of the root page" : 0,
+                        "Total number of pages currently in cache" : 0
+                },
+                "compression" : {
+                        "compressed pages read" : 0,
+                        "compressed pages written" : 0,
+                        "page written failed to compress" : 0,
+                        "page written was too small to compress" : 46,
+                        "raw compression call failed, additional data available" : 43,
+                        "raw compression call failed, no additional data available" : 0,
+                        "raw compression call succeeded" : 381
+                },
+                "cursor" : {
+                        "bulk-loaded cursor-insert calls" : 0,
+                        "create calls" : 2,
+                        "cursor-insert key and value bytes inserted" : 8173978,
+                        "cursor-remove key bytes removed" : 0,
+                        "cursor-update value bytes updated" : 0,
+                        "cursors cached on close" : 0,
+                        "cursors reused from cache" : 0,
+                        "insert calls" : 123229,
+                        "modify calls" : 0,
+                        "next calls" : 102,
+                        "prev calls" : 1,
+                        "remove calls" : 0,
+                        "reserve calls" : 0,
+                        "reset calls" : 123233,
+                        "restarted searches" : 0,
+                        "search calls" : 0,
+                        "search near calls" : 0,
+                        "truncate calls" : 0,
+                        "update calls" : 0
+                },
+                "reconciliation" : {
+                        "dictionary matches" : 0,
+                        "fast-path pages deleted" : 0,
+                        "internal page key bytes discarded using suffix compression" : 0,
+                        "internal page multi-block writes" : 0,
+                        "internal-page overflow keys" : 0,
+                        "leaf page key bytes discarded using prefix compression" : 0,
+                        "leaf page multi-block writes" : 43,
+                        "leaf-page overflow keys" : 0,
+                        "maximum blocks required for a page" : 1,
+                        "overflow values written" : 0,
+                        "page checksum matches" : 267,
+                        "page reconciliation calls" : 93,
+                        "page reconciliation calls for eviction" : 0,
+                        "pages deleted" : 0
+                },
+                "session" : {
+                        "cached cursor count" : 0,
+                        "object compaction" : 0,
+                        "open cursor count" : 2
+                },
+                "transaction" : {
+                        "update conflicts" : 0
+                }
+        },
+        "nindexes" : 1,
+        "totalIndexSize" : 1171456,
+        "indexSizes" : {
+                "_id_" : 1171456
+        },
+        "ok" : 1
+}
+
+
+AFTER ONE HOUR OF RUNNING NON_COMP
+-----------------------------------
+{
+        "ns" : "cs415.no_comp",
+        "size" : 7763427,
+        "count" : 123229,
+        "avgObjSize" : 63,
+        "storageSize" : 2461696,
+        "capped" : false,
+        "wiredTiger" : {
+                "metadata" : {
+                        "formatVersion" : 1
+                },
+                "creationString" : "access_pattern_hint=none,allocation_size=4KB,app_metadata=(formatVersion=1),assert=(commit_timestamp=none,read_timestamp=none),block_allocation=best,block_compressor=snappy,cache_resident=false,checksum=on,colgroups=,collator=,columns=,dictionary=0,encryption=(keyid=,name=),exclusive=false,extractor=,format=btree,huffman_key=,huffman_value=,ignore_in_memory_cache_size=false,immutable=false,internal_item_max=0,internal_key_max=0,internal_key_truncate=true,internal_page_max=4KB,key_format=q,key_gap=10,leaf_item_max=0,leaf_key_max=0,leaf_page_max=32KB,leaf_value_max=64MB,log=(enabled=true),lsm=(auto_throttle=true,bloom=true,bloom_bit_count=16,bloom_config=,bloom_hash_count=8,bloom_oldest=false,chunk_count_limit=0,chunk_max=5GB,chunk_size=10MB,merge_custom=(prefix=,start_generation=0,suffix=),merge_max=15,merge_min=0),memory_page_max=10m,os_cache_dirty_max=0,os_cache_max=0,prefix_compression=false,prefix_compression_min=4,source=,split_deepen_min_child=0,split_deepen_per_child=0,split_pct=90,type=file,value_format=u",
+                "type" : "file",
+                "uri" : "statistics:table:collection-21-3820486403940576980",
+                "LSM" : {
+                        "bloom filter false positives" : 0,
+                        "bloom filter hits" : 0,
+                        "bloom filter misses" : 0,
+                        "bloom filter pages evicted from cache" : 0,
+                        "bloom filter pages read into cache" : 0,
+                        "bloom filters in the LSM tree" : 0,
+                        "chunks in the LSM tree" : 0,
+                        "highest merge generation in the LSM tree" : 0,
+                        "queries that could have benefited from a Bloom filter that did not exist" : 0,
+                        "sleep for LSM checkpoint throttle" : 0,
+                        "sleep for LSM merge throttle" : 0,
+                        "total size of bloom filters" : 0
+                },
+                "block-manager" : {
+                        "allocations requiring file extension" : 328,
+                        "blocks allocated" : 498,
+                        "blocks freed" : 64,
+                        "checkpoint size" : 2416640,
+                        "file allocation unit size" : 4096,
+                        "file bytes available for reuse" : 28672,
+                        "file magic number" : 120897,
+                        "file major version number" : 1,
+                        "file size in bytes" : 2461696,
+                        "minor version number" : 0
+                },
+                "btree" : {
+                        "btree checkpoint generation" : 87106,
+                        "column-store fixed-size leaf pages" : 0,
+                        "column-store internal pages" : 0,
+                        "column-store variable-size RLE encoded values" : 0,
+                        "column-store variable-size deleted values" : 0,
+                        "column-store variable-size leaf pages" : 0,
+                        "fixed-record size" : 0,
+                        "maximum internal page key size" : 368,
+                        "maximum internal page size" : 4096,
+                        "maximum leaf page key size" : 2867,
+                        "maximum leaf page size" : 32768,
+                        "maximum leaf page value size" : 67108864,
+                        "maximum tree depth" : 3,
+                        "number of key/value pairs" : 0,
+                        "overflow pages" : 0,
+                        "pages rewritten by compaction" : 0,
+                        "row-store internal pages" : 0,
+                        "row-store leaf pages" : 0
+                },
+                "cache" : {
+                        "bytes currently in the cache" : 16774381,
+                        "bytes read into cache" : 0,
+                        "bytes written from cache" : 9844464,
+                        "checkpoint blocked page eviction" : 0,
+                        "data source pages selected for eviction unable to be evicted" : 0,
+                        "eviction walk passes of a file" : 0,
+                        "eviction walk target pages histogram - 0-9" : 0,
+                        "eviction walk target pages histogram - 10-31" : 0,
+                        "eviction walk target pages histogram - 128 and higher" : 0,
+                        "eviction walk target pages histogram - 32-63" : 0,
+                        "eviction walk target pages histogram - 64-128" : 0,
+                        "eviction walks abandoned" : 0,
+                        "eviction walks gave up because they restarted their walk twice" : 0,
+                        "eviction walks gave up because they saw too many pages and found no candidates" : 0,
+                        "eviction walks gave up because they saw too many pages and found too few candidates" : 0,
+                        "eviction walks reached end of tree" : 0,
+                        "eviction walks started from root of tree" : 0,
+                        "eviction walks started from saved location in tree" : 0,
+                        "hazard pointer blocked page eviction" : 0,
+                        "in-memory page passed criteria to be split" : 2,
+                        "in-memory page splits" : 1,
+                        "internal pages evicted" : 0,
+                        "internal pages split during eviction" : 0,
+                        "leaf pages split during eviction" : 0,
+                        "modified pages evicted" : 0,
+                        "overflow pages read into cache" : 0,
+                        "page split during eviction deepened the tree" : 0,
+                        "page written requiring lookaside records" : 0,
+                        "pages read into cache" : 0,
+                        "pages read into cache after truncate" : 1,
+                        "pages read into cache after truncate in prepare state" : 0,
+                        "pages read into cache requiring lookaside entries" : 0,
+                        "pages requested from the cache" : 123230,
+                        "pages seen by eviction walk" : 0,
+                        "pages written from cache" : 407,
+                        "pages written requiring in-memory restoration" : 0,
+                        "tracked dirty bytes in the cache" : 0,
+                        "unmodified pages evicted" : 0
+                },
+                "cache_walk" : {
+                        "Average difference between current eviction generation when the page was last considered" : 0,
+                        "Average on-disk page image size seen" : 0,
+                        "Average time in cache for pages that have been visited by the eviction server" : 0,
+                        "Average time in cache for pages that have not been visited by the eviction server" : 0,
+                        "Clean pages currently in cache" : 0,
+                        "Current eviction generation" : 0,
+                        "Dirty pages currently in cache" : 0,
+                        "Entries in the root page" : 0,
+                        "Internal pages currently in cache" : 0,
+                        "Leaf pages currently in cache" : 0,
+                        "Maximum difference between current eviction generation when the page was last considered" : 0,
+                        "Maximum page size seen" : 0,
+                        "Minimum on-disk page image size seen" : 0,
+                        "Number of pages never visited by eviction server" : 0,
+                        "On-disk page image sizes smaller than a single allocation unit" : 0,
+                        "Pages created in memory and never written" : 0,
+                        "Pages currently queued for eviction" : 0,
+                        "Pages that could not be queued for eviction" : 0,
+                        "Refs skipped during cache traversal" : 0,
+                        "Size of the root page" : 0,
+                        "Total number of pages currently in cache" : 0
+                },
+                "compression" : {
+                        "compressed pages read" : 0,
+                        "compressed pages written" : 358,
+                        "page written failed to compress" : 0,
+                        "page written was too small to compress" : 49,
+                        "raw compression call failed, additional data available" : 0,
+                        "raw compression call failed, no additional data available" : 0,
+                        "raw compression call succeeded" : 0
+                },
+                "cursor" : {
+                        "bulk-loaded cursor-insert calls" : 0,
+                        "create calls" : 2,
+                        "cursor-insert key and value bytes inserted" : 8173978,
+                        "cursor-remove key bytes removed" : 0,
+                        "cursor-update value bytes updated" : 0,
+                        "cursors cached on close" : 0,
+                        "cursors reused from cache" : 0,
+                        "insert calls" : 123229,
+                        "modify calls" : 0,
+                        "next calls" : 1,
+                        "prev calls" : 1,
+                        "remove calls" : 0,
+                        "reserve calls" : 0,
+                        "reset calls" : 123231,
+                        "restarted searches" : 0,
+                        "search calls" : 0,
+                        "search near calls" : 0,
+                        "truncate calls" : 0,
+                        "update calls" : 0
+                },
+                "reconciliation" : {
+                        "dictionary matches" : 0,
+                        "fast-path pages deleted" : 0,
+                        "internal page key bytes discarded using suffix compression" : 7203,
+                        "internal page multi-block writes" : 2,
+                        "internal-page overflow keys" : 0,
+                        "leaf page key bytes discarded using prefix compression" : 0,
+                        "leaf page multi-block writes" : 47,
+                        "leaf-page overflow keys" : 0,
+                        "maximum blocks required for a page" : 1,
+                        "overflow values written" : 0,
+                        "page checksum matches" : 3274,
+                        "page reconciliation calls" : 95,
+                        "page reconciliation calls for eviction" : 0,
+                        "pages deleted" : 0
+                },
+                "session" : {
+                        "cached cursor count" : 0,
+                        "object compaction" : 0,
+                        "open cursor count" : 2
+                },
+                "transaction" : {
+                        "update conflicts" : 0
+                }
+        },
+        "nindexes" : 1,
+        "totalIndexSize" : 1171456,
+        "indexSizes" : {
+                "_id_" : 1171456
+        },
+        "ok" : 1
+}

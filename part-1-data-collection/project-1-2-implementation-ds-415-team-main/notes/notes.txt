@@ -1,0 +1,7 @@
+REGEX for last name?
+db.twitter_sampled.findOne({"data.text" : {$regex : ".*@realDonaldTrump.*"}});
+
+db.[collection].stats()
+db.[collection].count()
+
+For twitter, might want to check the mentions tab too!
